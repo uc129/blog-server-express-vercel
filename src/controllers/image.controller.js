@@ -63,7 +63,7 @@ class ImageController {
     async getById(req, res) {
         try {
             console.log(req.params.id);
-            const image = await Image.findById(req.params.id);
+            const image = await Image.findById({ _id: String(req.params.id) });
             if (!image) {
                 return res.status(404).json({ message: 'Image not found' });
             }
