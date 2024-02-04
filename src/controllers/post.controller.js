@@ -1,89 +1,6 @@
-// import Post from '../models/post'
-// import { postValidator } from '../validators/post.validate';
-// import Comment from '../models/comment';
-
 const Post = require('../models/post');
 const { postValidator } = require('../validators/post.validate');
 const Comment = require('../models/comment');
-
-
-// title: { type: String, required: true, trim: true, index: true, min: 3, match: /[a-zA-Z0-9]/ },
-// content: { type: String, required: true, trim: true, min: 3 },
-
-// author: {
-//     type: Schema.Types.ObjectId, ref: 'User', required: true,
-//     validate: {
-//         validator: async function (value) {
-//             return await User.exists({ _id: value });  // return await User.exists({ _id: value, role: 'artist' });  
-//         }, message: 'Invalid User'
-//     }
-// },
-
-// images: [
-//     {
-//         type: Schema.Types.ObjectId, ref: 'Image', validate: {
-//             validator: async function (value) {
-//                 return await Image.findById(value) != null;
-//             }, message: 'Invalid Image'
-//         }
-//     }
-// ],
-
-// comments: [
-//     {
-//         type: Schema.Types.ObjectId, ref: 'Comment',
-//         validate: {
-//             validator: async function (value) {
-//                 return await Comment.findById(value) != null;
-//             }, message: 'Invalid Comment'
-//         }
-//     }
-// ],
-
-
-
-// slug: { type: String, required: true, trim: true, unique: true, index: true, min: 3, },
-
-// category: {
-//     type: Schema.Types.ObjectId, ref: 'Category', required: true,
-//     validate: {
-//         validator: async function (value) {
-//             return await Category.findById(value) != null;
-//         }, message: 'Invalid Category'
-//     }
-// },
-
-// tags: [{
-//     type: Schema.Types.ObjectId, ref: 'Tag',
-//     validate: {
-//         validator: async function (value) {
-//             return await Tag.findById(value) != null;
-//         }, message: 'Invalid Tag'
-//     }
-// }],
-
-
-
-// meta: {
-//     likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-//     dislikes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-//     views: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-//     bookmarks: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-//     shares: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-//     reports: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-// },
-// status: { type: String, enum: ['draft', 'published'], default: 'draft' },
-
-// dates: {
-//     initiated: { type: Date, default: Date.now },
-//     published: { type: Date },
-//     updated: { type: Date },
-// },
-
-
-
-
-
 
 class PostController {
 
@@ -139,15 +56,39 @@ class PostController {
             return res.json(post);
         }
         catch (error) {
+            console.log(error);
             return (res.json(error))
         }
     }
 
 
 
+    async getByTag(req, res) {
+        try {
+            let tag = req.params.tag;
+            console.log('tag', tag);
+            const posts = await Post.find({ tags: tag });
+            return res.json(posts);
+        }
+        catch (error) {
+            console.log(error);
+            return (res.json(error))
+        }
+    }
 
 
-
+    async getByCategory(req, res) {
+        try {
+            let category = req.params.category;
+            console.log('category', category);
+            const posts = await Post.find({ category: category });
+            return res.json(posts);
+        }
+        catch (error) {
+            console.log(error);
+            return (res.json(error))
+        }
+    }
 
 
     async delete(req, res) {

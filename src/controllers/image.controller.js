@@ -62,6 +62,7 @@ class ImageController {
 
     async getById(req, res) {
         try {
+            console.log(req.params.id);
             const image = await Image.findById(req.params.id);
             if (!image) {
                 return res.status(404).json({ message: 'Image not found' });
@@ -71,6 +72,26 @@ class ImageController {
             console.log(error);
             res.status(500).json({ message: error.message });
         }
+    }
+
+
+    async search(req, res) {
+        let query = req.query
+        // console.log('query', query);
+
+        try {
+            const images = await Image.find(query)
+            if (!images) {
+                return res.status(404).json({ message: 'Images not found' });
+            }
+            // console.log(images);
+            res.json(images);
+
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: error.message });
+        }
+
     }
 
 

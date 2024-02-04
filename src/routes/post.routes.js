@@ -33,10 +33,27 @@ router.get('/:id', controller.getById);
 
 // router.get('/search', controller.search);
 
+
+
+// @route   GET api/posts/tags/:tag
+// @desc    Get posts by tag
+// @access  Public
+router.get('/tags/:tag', controller.getByTag);
+
+
+
+
+
+// @route   GET api/posts/category/:category
+// @desc    Get posts by category
+// @access  Public
+router.get('/category/:category', controller.getByCategory);
+
+
+
 // @route   POST api/posts
 // @desc    Create post
 // @access  Private
-
 router.post('/create', upload.none(), controller.create);
 
 // @route   PUT api/posts/:id

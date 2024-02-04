@@ -17,7 +17,7 @@ ImageRouter.get('/all', controller.getAll);
 // @route   GET api/images/:id
 // @desc    Get image by id
 // @access  Public
-ImageRouter.get('/:id', controller.getById);
+ImageRouter.get('/id/:id', controller.getById);
 
 
 // @route   POST api/images
@@ -36,6 +36,11 @@ ImageRouter.post('/upload', upload.single('image'), controller.upload);
 // @desc    Delete image
 // @access  Private
 // ImageRouter.delete('/delete/:id', controller.delete);
+
+
+
+
+ImageRouter.get('/search', controller.search);
 
 
 module.exports = ImageRouter;

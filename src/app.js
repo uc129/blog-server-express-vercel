@@ -45,12 +45,12 @@ app.use(session(sess))
 const port = process.env.PORT || 4000;
 
 app.get('/', (req, res) => {
-    res.send('Hello World! This is the blog api');
+    res.send("Welcome to Unnati's Blog API!");
 });
 
 app.get('/api/v1', (req, res) => {
     res.json({
-        message: "Welcome to the blog api",
+        message: "Welcome!! This is Unnati's Blog API v1.0.0",
         session: req.session,
         sessionID: req.sessionID
     });
